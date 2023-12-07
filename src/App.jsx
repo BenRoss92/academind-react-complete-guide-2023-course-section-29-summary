@@ -1,10 +1,19 @@
 import { Post } from './components/Post';
 import { PostList } from './components/PostList';
+import { useState } from 'react';
 
 function App() {
+
+  const [postsData, setPostsData] = useState([
+    { author: 'Ben', body: 'I liked this course' },
+    { author: 'Sammy', body: 'I loved this course' },
+    { author: 'Matty', body: 'I disliked this course' },
+    { author: 'Pip', body: 'I hated this course' }
+  ]);
+
   return (
     <main>
-      <PostList />
+      <PostList postsData={postsData}/>
     </main>
   );
 }

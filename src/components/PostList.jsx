@@ -1,11 +1,14 @@
 import { Post } from "./Post";
 import classes from "./PostList.module.css";
 
-export function PostList() {
+export function PostList(props) {
+  const postComponents = props.postsData.map(function (postData, index) {
+    return <Post key={index} author={postData.author} body={postData.body}/>
+  });
+
   return (
     <ul className={classes.posts}>
-      <Post author={"Ben Ross"} body={"This course changed my freakin' life! 50 million stars!!!"}/>
-      <Post author={"Ren Boss"} body={"I hated this course. It was roobish. Money back please?!?!"}/>
+      {postComponents}
     </ul>
   );
 }
