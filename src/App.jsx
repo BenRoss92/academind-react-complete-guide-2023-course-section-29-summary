@@ -1,4 +1,4 @@
-import { Post } from './components/Post';
+import { NewPost } from './components/NewPost';
 import { PostList } from './components/PostList';
 import { useState } from 'react';
 
@@ -13,6 +13,7 @@ function App() {
 
   return (
     <main>
+      <NewPost/>
       <PostList postsData={postsData}/>
     </main>
   );
