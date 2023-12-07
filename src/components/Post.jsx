@@ -1,8 +1,8 @@
-export function Post() {
+export function Post(props) {
   return (
     <div>
-      <p>Learning React</p>
-      <p>This is a custom component</p>
+      <p>{props.author}</p>
+      <p>{props.body}</p>
     </div>
   );
 }
