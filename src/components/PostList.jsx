@@ -12,15 +12,20 @@ export function PostList() {
     { author: 'Pip', body: 'I hated this course' }
   ]);
 
+  const [ isModalOpen, setIsModalOpen ] = useState(true);
+
   const postComponents = postsData.map(function (postData, index) {
     return <Post key={index} author={postData.author} body={postData.body}/>
   });
 
   return (
     <>
-      <Modal>
-        <NewPost setPostsData={setPostsData}/>
-      </Modal>
+      {
+        isModalOpen && 
+          <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+            <NewPost setPostsData={setPostsData}/>
+          </Modal>
+      }
 
       <ul className={classes.posts}>
         {postComponents}
