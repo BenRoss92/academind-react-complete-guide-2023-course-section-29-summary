@@ -1,7 +1,4 @@
-import { NewPost } from './components/NewPost';
 import { PostList } from './components/PostList';
-import { Modal } from './components/Modal';
-import { useState } from 'react';
 /**
  * 
  * Aim: Create a new post by typing in a author and a body into the form. When you click 'Create post', a new post is displayed.
@@ -11,19 +8,9 @@ import { useState } from 'react';
  */
 function App() {
 
-  const [postsData, setPostsData] = useState([
-    { author: 'Ben', body: 'I liked this course' },
-    { author: 'Sammy', body: 'I loved this course' },
-    { author: 'Matty', body: 'I disliked this course' },
-    { author: 'Pip', body: 'I hated this course' }
-  ]);
-
   return (
     <main>
-      <Modal>
-        <NewPost setPostsData={setPostsData}/>
-      </Modal>
-      <PostList postsData={postsData}/>
+      <PostList/>
     </main>
   );
 }

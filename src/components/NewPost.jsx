@@ -21,7 +21,6 @@ export function NewPost(props) {
    * Use React's useState hook to be able to update the state of the author and get the current state of the author and set the beginning state (empty value)
    */
   function createPost(e) {
-    // Log out the author and text values
     e.preventDefault();
 
     props.setPostsData(prevPostsData => [...prevPostsData, {author: author, body: body}]);
