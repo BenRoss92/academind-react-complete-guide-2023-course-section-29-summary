@@ -1,5 +1,6 @@
 import { NewPost } from './components/NewPost';
 import { PostList } from './components/PostList';
+import { Modal } from './components/Modal';
 import { useState } from 'react';
 /**
  * 
@@ -19,7 +20,9 @@ function App() {
 
   return (
     <main>
-      <NewPost setPostsData={setPostsData}/>
+      <Modal>
+        <NewPost setPostsData={setPostsData}/>
+      </Modal>
       <PostList postsData={postsData}/>
     </main>
   );
