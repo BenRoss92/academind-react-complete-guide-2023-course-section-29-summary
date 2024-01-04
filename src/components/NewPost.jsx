@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classes from './NewPost.module.css';
 
-export function NewPost(props) {
+export function NewPost({setPostsData, onCancelPost}) {
 
   const [author, setAuthor] = useState('');
   const [body, setBody] = useState('');
@@ -23,7 +23,7 @@ export function NewPost(props) {
   function createPost(e) {
     e.preventDefault();
 
-    props.setPostsData(prevPostsData => [...prevPostsData, {author: author, body: body}]);
+    setPostsData(prevPostsData => [...prevPostsData, {author: author, body: body}]);
   }
 
   return (
@@ -36,7 +36,17 @@ export function NewPost(props) {
         <label htmlFor="name">Your name</label>
         <input type="text" id="name" required value={author} onChange={handleAuthorChange}/>
       </p>
-      <input type="submit" value="Create post"/>
+      <p className={classes.actions}>
+        {/* N.B. Gotcha: Don't call your function when passing it to an event listener (e.g. `onClick`). 
+          * The value assigned to an event listener needs to be a function, not the result of a function 
+          * Otherwise your event handler function will be called immediately ever time the component renders, 
+          * instead of only being called after a certain event happens on a DOM element (e.g. a DOM element being clicked).
+        */}
+        {/* Default type for button element is 'submit'. To stop the cancel button from being treated as a form submission, use type="button" */}
+        <button type="button" onClick={onCancelPost}>Cancel</button>
+        {/* Button is automatically treated as a submit button as default type for button element is 'submit'. */}
+        <button>Submit</button>
+      </p>
     </form>
   );
 }

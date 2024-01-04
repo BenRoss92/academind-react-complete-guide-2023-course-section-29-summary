@@ -4,7 +4,7 @@ import { NewPost } from "./NewPost";
 import { Post } from "./Post";
 import classes from "./PostList.module.css";
 
-export function PostList({isModalOpen, setIsModalOpen}) {
+export function PostList({isModalOpen, onCancelPost}) {
   const [postsData, setPostsData] = useState([
     { author: 'Ben', body: 'I liked this course' },
     { author: 'Sammy', body: 'I loved this course' },
@@ -20,8 +20,8 @@ export function PostList({isModalOpen, setIsModalOpen}) {
     <>
       {
         isModalOpen && 
-          <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-            <NewPost setPostsData={setPostsData}/>
+          <Modal isModalOpen={isModalOpen} onCancelPost={onCancelPost}>
+            <NewPost setPostsData={setPostsData} onCancelPost={onCancelPost}/>
           </Modal>
       }
 

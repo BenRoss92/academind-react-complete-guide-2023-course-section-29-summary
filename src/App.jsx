@@ -15,10 +15,14 @@ function App() {
     setIsModalOpen(true);
   }
 
+  function onCancelPost() {
+    setIsModalOpen(false);
+  }
+
   return (
     <main>
       <MainHeader onCreatePost={onCreatePost}/>
-      <PostList isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+      <PostList isModalOpen={isModalOpen} onCancelPost={onCancelPost}/>
     </main>
   );
 }

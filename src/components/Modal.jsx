@@ -4,12 +4,12 @@ import classes from './Modal.module.css';
 export function Modal({ 
   children,
   isModalOpen,
-  setIsModalOpen
+  onCancelPost
 }) {
 
   return (
     <>
-      <div className={classes.backdrop} onClick={() => setIsModalOpen(false)} />
+      <div className={classes.backdrop} onClick={onCancelPost} />
       <dialog className={classes.modal} open={isModalOpen}>
         {children}
       </dialog>
