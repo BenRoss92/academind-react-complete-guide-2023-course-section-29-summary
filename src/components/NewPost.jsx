@@ -21,12 +21,17 @@ export function NewPost({setPostsData, onCancelPost}) {
    * Use React's useState hook to be able to update the state of the author and get the current state of the author and set the beginning state (empty value)
    */
   function createPost(e) {
+    // Stops the form from automatically trying to send an HTTP request to the same domain/origin/server where our React app is being served. 
+    // If this happened, it would cause a whole page re-render. We don't want the server to try to handle this form submission.
+    // Instead we want the client (our React code) to handle this form submission. 
     e.preventDefault();
 
     setPostsData(prevPostsData => [...prevPostsData, {author: author, body: body}]);
+    onCancelPost();
   }
 
   return (
+    // onSubmit is automatically triggered under the hood when the submit button is clicked
     <form className={classes.form} onSubmit={createPost}>
       <p>
         <label htmlFor="body">Text</label>
