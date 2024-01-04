@@ -6,6 +6,8 @@ import classes from "./PostList.module.css";
 
 export function PostList({isModalOpen, onCancelPost}) {
   const [postsData, setPostsData] = useState([]);
+  // Start off as not loading (as we haven't started trying to load anything yet - not until we fetch)
+  const [isLoading, setIsLoading] = useState(false);
   
   /**
    * Fetch posts from backend to be displayed the first time the component renders
@@ -29,28 +31,39 @@ export function PostList({isModalOpen, onCancelPost}) {
    * has been updated. Which would then cause another fetch, again updating the state and causing an infinite loop.
    */
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8080/posts")
       .then((response) => response.json())
       .then((data) => {
         // Update the local react posts state with the updated posts from the backend
         setPostsData(data.posts);
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <>
       {
-        isModalOpen && 
+        isLoading && 
+          <h2>Loading posts...</h2>
+      }
+
+      {
+        // Creating a new post in the backend isn't dependent on whether 
+        // we've finished fetching other posts from the backend, 
+        // so we don't have to check whether we're in a loading state or not
+        // to show the modal.
+        isModalOpen &&
           <Modal isModalOpen={isModalOpen} onCancelPost={onCancelPost}>
             <NewPost setPostsData={setPostsData} onCancelPost={onCancelPost}/>
           </Modal>
       }
 
-      {postsData.length === 0 && 
+      {!isLoading && postsData.length === 0 && 
         <h2>No posts</h2>
       }
 
-      {postsData.length > 0 &&
+      {!isLoading && postsData.length > 0 &&
         <ul className={classes.posts}>
           {postsData.map((postData) => 
             // Am using the ID that we get from the backend as a way of making each React `key` for each Post unique
