@@ -26,6 +26,16 @@ export function NewPost({setPostsData, onCancelPost}) {
     // Instead we want the client (our React code) to handle this form submission. 
     e.preventDefault();
 
+    // We pass a function to setState to determine the new state, instead of just passing setState a new array.
+    // This is because as a rule in React, if we're updating a state, 
+    // and that state happens to need to know the previous state's value in order to work out 
+    // what the new state value should be, then we need to pass a function to ensure that the new state. 
+    // This is because React sometimes might decide to batch multiple calls to setState together in one call
+    // (one single update) to improve performance. This means that the state variable being updated might be 
+    // updated asynchronously, so we can't rely on the previous state value always 
+    // being what we think it will be. The new state otherwise might be calculated based on 
+    // some older more stale state value, so we may end up with an incorrect value for the new state
+    // if we try to calculate it ourselves in this way.
     setPostsData(prevPostsData => [...prevPostsData, {author: author, body: body}]);
     onCancelPost();
   }
