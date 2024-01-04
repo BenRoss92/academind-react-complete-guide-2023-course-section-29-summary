@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "./Modal";
 import { NewPost } from "./NewPost";
 import { Post } from "./Post";
@@ -6,6 +6,27 @@ import classes from "./PostList.module.css";
 
 export function PostList({isModalOpen, onCancelPost}) {
   const [postsData, setPostsData] = useState([]);
+  
+  /**
+   * Fetch posts from backend to be displayed the first time the component renders
+   * Only do one fetch the first time the component renders - we don't want to fetch on re-renders
+   * If the fetching succeeds (doesn't fail), update the local react posts state with the fetched posts
+   * After fetching the backend posts and updating the local react state, display whatever posts are in the local react state
+   * 
+   * Use a useEffect hook to fetch the posts in the background
+   * Pass an empty array as a second argument to useEffect to only make the fetching happen once on the first render and not on re-renders
+   * 
+   * Inside of the useEffect hook, set the postsData state with the updated posts using setPostsData
+   * Outside of the useEffect hook, in the return statement (i.e. the render function), reference the new postsData state variable to display the updated posts
+   */
+  useEffect(() => {
+    fetch("http://localhost:8080/posts")
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the local react posts state with the updated posts from the backend
+        setPostsData(data.posts);
+      });
+  }, []);
 
   return (
     <>
