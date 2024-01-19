@@ -13,17 +13,13 @@ import { Outlet } from 'react-router-dom';
 function App() {
   const [ isModalOpen, setIsModalOpen ] = useState(false);
 
-  function onCreatePost() {
-    setIsModalOpen(true);
-  }
-
   function onCancelPost() {
     setIsModalOpen(false);
   }
 
   return (
     <main>
-      <MainHeader onCreatePost={onCreatePost}/>
+      <MainHeader />
       <Outlet />
       <PostList isModalOpen={isModalOpen} onCancelPost={onCancelPost}/>
     </main>
