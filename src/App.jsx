@@ -1,6 +1,8 @@
 import { PostList } from './components/PostList';
 import { MainHeader } from './components/MainHeader';
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+
 /**
  * 
  * Aim: Create a new post by typing in a author and a body into the form. When you click 'Create post', a new post is displayed.
@@ -22,6 +24,7 @@ function App() {
   return (
     <main>
       <MainHeader onCreatePost={onCreatePost}/>
+      <Outlet />
       <PostList isModalOpen={isModalOpen} onCancelPost={onCancelPost}/>
     </main>
   );
