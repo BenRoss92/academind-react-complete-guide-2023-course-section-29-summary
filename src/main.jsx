@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Root } from "./routes/root";
+import { CreatePost } from "./routes/create-post";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { NewPost } from './components/NewPost';
-import { Modal } from './components/Modal';
 import './index.css'
 
 const router = createBrowserRouter([
@@ -13,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/create-post",
-        element: <Modal isModalOpen={true}><NewPost /></Modal>
+        element: <CreatePost />
       }
     ]
   },
