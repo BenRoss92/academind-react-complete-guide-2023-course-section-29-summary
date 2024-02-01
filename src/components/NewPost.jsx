@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import classes from './NewPost.module.css';
 
 export function NewPost({setPostsData, onCancelPost}) {
@@ -89,7 +90,9 @@ export function NewPost({setPostsData, onCancelPost}) {
           * instead of only being called after a certain event happens on a DOM element (e.g. a DOM element being clicked).
         */}
         {/* Default type for button element is 'submit'. To stop the cancel button from being treated as a form submission, use type="button" */}
-        <button type="button" onClick={onCancelPost}>Cancel</button>
+        <Link to={".."} relative="path">
+          Cancel
+        </Link>
         {/* Button is automatically treated as a submit button as default type for button element is 'submit'. */}
         <button>Submit</button>
       </p>
